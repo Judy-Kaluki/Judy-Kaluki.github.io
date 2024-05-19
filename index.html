@@ -16,21 +16,36 @@
                             object-fit: cover; 
                             margin-bottom:  20px;
                             }
+        /* Basic styling for the navigation bar */
+        .navbar {
+          transition: top 0.3s; /* Smooth transition for sticky effect */
+        }
+
+        /* Style for when the navbar becomes sticky */
+        .navbar.sticky {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000; /* Ensure the navbar stays on top */
+        }
+
+        /* Optional: Adjust padding for smooth scrolling */
+        section {
+          padding-top: 70px; /* Adjust based on your navbar height */
+        }                    
+         
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"> 
       <div class="container">
-        <a class="navbar-brand" href="#home">Your Name</a> 
+        <a class="navbar-brand" href="#home">Kaluki's Portfolio</a> 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto"> 
-            <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
             </li>
@@ -42,7 +57,36 @@
       </div>
     </nav>
 
-    <section class="about-section">
+    <script> window.onscroll = function() {stickyNav()};
+
+    // Get the navbar
+    var navbar = document.querySelector('.navbar');
+    
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+    
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function stickyNav() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+    
+    // Smooth scrolling to section
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+    
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    </script>
+
+    <section id="about" class="about-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -75,7 +119,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    
-    <section class="container-fluid p-5">
+    <section id="projects" class="container-fluid p-5">
         <div class="row">
           <div class="col-sm-12">
             <h2 class="text-center mb-4">Projects</h2>
